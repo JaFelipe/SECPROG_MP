@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <h1>Registration</h1>
+        </tr>
+        <tr>
+          <td>{{ form.as_p }}</td>
+        </tr>
+        
+<!--
+        <tr>
+          <td>{{ form.username.label_tag}}</td>
+          <td>{{ form.username}}</td>
+        </tr>
+        <tr>
+          <td>{{ form.password1.label_tag}}</td>
+          <td>{{ form.password1}}</td>
+        </tr>
+        <tr>
+          <td>{{ form.password2.label_tag}}</td>
+          <td>{{ form.password2}}</td>
+        </tr>
+-->
+
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>   
+{% endblock %}

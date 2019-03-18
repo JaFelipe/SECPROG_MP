@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Model list</h1>
+    {% if copy_list %}
+    <ul>
+      {% for copy in copy_list %}
+        <li>
+          <a href="{{ copy.get_absolute_url }}">{{ model.model_number }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+        <p>There is no equipment in the database</p>
+    {% endif %}
+{% endblock %}

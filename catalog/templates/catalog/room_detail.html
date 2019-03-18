@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Name: {{ room.name }}</h1>
+
+  <p><strong>Description:</strong> <a href="">{{ room.description }}</a></p> <!-- author detail link not yet defined -->
+  
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Status</h4>
+
+    {% for copy in room.roominstance_set.all %}
+      <hr>
+      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+      <p class="text-muted"><strong>Room Code:</strong> {{copy.room_code}}</p>
+      {% if copy.status != 'a' %}
+        <p><strong>Reserved By:</strong> {{copy.borrower}}</p>
+        <p><strong>Due to be returned:</strong> {{copy.due_back}}</p>
+      {% endif %}
+      
+       {% if copy.status == 'a' %}
+        <form method="POST" action ="{% url 'borrow_room' copy.id%}" enctype="multipart/form data">
+
+         {% csrf_token %}
+          <button type="submit" class="btn btn-success">Reserve Room</button>
+        </form> {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}
